@@ -5,6 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-    <p th:text="${car.mark}"></p>
+<tr th:each="car: ${carList}">
+    <td th:text="${car.getMark()}"/><br>
+    <td th:text="${car.getModel()}"/><br>
+</tr>
 </body>
 </html>
