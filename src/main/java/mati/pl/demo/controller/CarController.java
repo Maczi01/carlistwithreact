@@ -24,7 +24,7 @@ public class CarController {
         carList = Arrays.asList(car1, car2, car3, car3, car4, car5);
     }
 
-    @GetMapping
+    @GetMapping("/cars")
     public String get(Model model) {
         model.addAttribute("carList", carList);
         model.addAttribute("newCar", new Car());
@@ -33,8 +33,8 @@ public class CarController {
 
     @PostMapping("/add")
     public String addCar(@ModelAttribute Car car){
-        carList.add(car);
+//        carList.add(car);
         System.out.println(car);
-        return "redirect: /";
+        return "redirect: /cars";
     }
 }

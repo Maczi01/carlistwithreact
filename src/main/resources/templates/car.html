@@ -6,14 +6,16 @@
 </head>
 <body>
 <tr th:each="car: ${carList}">
-    <td th:text="${car.getMark()}"/><br>
-    <td th:text="${car.getModel()}"/><br>
+    <td th:text="${car.getMark()}"/>
+    <br>
+    <td th:text="${car.getModel()}"/>
+    <br>
 </tr>
 
 <form th:action="@{/add}" th:object="${newCar}" method="post">
-<p>Model:</p><input type="text" th:field="*{model}"/>
-<p>Mark:</p><input type="text"  th:field="*{mark}"/>
-<input onsubmit="" type="button" value="Add new Car">
+    <p>Model:<input type="text" th:field="*{model}"/></p>
+    <p>Mark:<input type="text" th:field="*{mark}"/></p>
+    <input type="submit" value="Add new Car">
 </form>
 </body>
 </html>
