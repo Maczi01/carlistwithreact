@@ -30,9 +30,10 @@ public class CarController {
         return "car";
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public String addCar(@ModelAttribute Car car){
         carList.add(car);
+        System.out.println(car);
         return "car";
     }
 }
