@@ -10,7 +10,7 @@
     <td th:text="${car.getModel()}"/><br>
 </tr>
 
-<form th:action="@{/add}" th:object="${newCar}">
+<form th:action="@{/add}" th:object="${newCar}" method="post">
 <p>Model:</p><input type="text" th:field="*{model}"/>
 <p>Mark:</p><input type="text"  th:field="*{mark}"/>
 <input onsubmit="" type="button" value="Add new Car">
