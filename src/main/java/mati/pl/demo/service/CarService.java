@@ -43,6 +43,7 @@ public class CarService implements CarRepository {
                 .findFirst();
         if (optionalCar.isPresent()) {
             cars.set((int) optionalCar.get().getId(), car);
+            return true;
         }
         return false;
     }
