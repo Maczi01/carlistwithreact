@@ -1,7 +1,8 @@
-package mati.pl.demo.controller;
+package mati.pl.demo.model;
 
 public class Car {
 
+    private long id;
     private String mark;
     private String model;
 
@@ -9,9 +10,18 @@ public class Car {
     public Car() {
     }
 
-    public Car(String mark, String model) {
+    public Car(long id, String mark, String model) {
+        this.id = id;
         this.mark = mark;
         this.model = model;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getMark() {
