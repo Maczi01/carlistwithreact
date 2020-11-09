@@ -1,6 +1,6 @@
 const BASE_URL = "http://localhost:8080/";
 
-const FakeTimeboxesApi = {
+export const Api = {
     getAllTimeboxes: async () => {
         const response = await makeRequest(BASE_URL, "GET");
         const timeboxes = await response.json();
@@ -47,4 +47,4 @@ const makeRequest = async (url, method, body) => {
     return response;
 }
 
-export default FakeTimeboxesApi;
+ // default Api;
