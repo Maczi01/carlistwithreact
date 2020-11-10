@@ -16,8 +16,11 @@ class App extends React.Component {
             .catch(error => console.log("Can not load data"));
     }
 
-    deleteCar = (car) =>{
-        Api.removeTimebox(car);
+    deleteCar = (indexToRemove) =>{
+        Api.removeTimebox(indexToRemove).then(this.setState(prevState => {
+            const cars = this.state.cars.filter((user, index) => user.id !== indexToRemove)
+            return {cars}
+        }))
     }
 
 
@@ -30,10 +33,9 @@ class App extends React.Component {
                     <p>
                         Cars List
                     </p>
-                    {}
                     <ul>
                         {this.state.cars.map(e =>
-                            <Item mark={e.mark} model={e.model} deleteCar ={this.deleteCar()}> </Item>
+                            <Item id={e.id} mark={e.mark} model={e.model} deleteCar ={() => this.deleteCar(e.id)}> </Item>
                         )}
 
                     </ul>

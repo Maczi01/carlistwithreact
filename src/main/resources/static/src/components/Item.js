@@ -18,9 +18,10 @@ const Li = styled.li`
 display: flex;
 `
 
-const Item = ({mark, model, deleteCar}) => (
+const Item = ({mark, model, id, deleteCar}) => (
     <Li>
         <p>{mark} {model}</p>
+        <p>id: {id}</p>
         <StyledButton src={edit}/>
         <StyledButton src={del} onClick={deleteCar}/>
     </Li>

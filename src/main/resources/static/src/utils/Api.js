@@ -22,11 +22,11 @@ export const Api = {
         return replacedTimebox;
     },
 
-    removeTimebox: async (timeboxToRemove) => {
-        if (!timeboxToRemove.id) {
-            throw new Error("This timebox haven't id!")
-        }
-        await makeRequest(`${BASE_URL}${timeboxToRemove.id}`, "DELETE");
+    removeTimebox: async (id) => {
+        // if (!timeboxToRemove.id) {
+        //     throw new Error("This timebox haven't id!")
+        // }
+        await makeRequest(`${BASE_URL}${id}`, "DELETE");
     }
 };
 
