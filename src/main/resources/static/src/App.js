@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import {Api} from './utils/Api';
 import React from 'react';
+import Item from "./components/Item";
 
 class App extends React.Component {
 
@@ -28,7 +29,7 @@ class App extends React.Component {
                     {}
                     <ul>
                         {this.state.cars.map(e =>
-                            <li> {e.mark}</li>
+                            <Item mark={e.mark} model={e.model}> </Item>
                         )}
 
                     </ul>
