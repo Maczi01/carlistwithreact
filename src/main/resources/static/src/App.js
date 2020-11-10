@@ -16,6 +16,10 @@ class App extends React.Component {
             .catch(error => console.log("Can not load data"));
     }
 
+    deleteCar = (car) =>{
+        Api.removeTimebox(car);
+    }
+
 
     render() {
 
@@ -24,12 +28,12 @@ class App extends React.Component {
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
                     <p>
-                        Kaczka
+                        Cars List
                     </p>
                     {}
                     <ul>
                         {this.state.cars.map(e =>
-                            <Item mark={e.mark} model={e.model}> </Item>
+                            <Item mark={e.mark} model={e.model} deleteCar ={this.deleteCar()}> </Item>
                         )}
 
                     </ul>
