@@ -3,6 +3,20 @@ import './App.css';
 import {Api} from './utils/Api';
 import React from 'react';
 import Item from "./components/Item";
+import settings from './img/settings.svg'
+import styled from 'styled-components'
+import Modal from "./components/Modal";
+
+const StyledButton = styled.img`
+    margin: 0 30px;
+    margin-bottom: 20px;
+    border-radius: 3px;
+  background-color: #282c34;
+    padding: 5px;
+    height: 40px;
+    width: 40px;
+    justify-content: space-around;
+`
 
 class App extends React.Component {
 
@@ -16,12 +30,19 @@ class App extends React.Component {
             .catch(error => console.log("Can not load data"));
     }
 
-    deleteCar = (indexToRemove) =>{
+    deleteCar = (indexToRemove) => {
         Api.removeTimebox(indexToRemove).then(this.setState(prevState => {
             const cars = this.state.cars.filter((user, index) => user.id !== indexToRemove)
             return {cars}
         }))
     }
+
+
+    addCar = (car) => {
+        Api.addNewTimebox(car)
+            .then(() => Equipy.getEquipy())
+            .then(cars => this.setState({cars}))
+    };
 
 
     render() {
@@ -33,12 +54,18 @@ class App extends React.Component {
                     <p>
                         Cars List
                     </p>
+                    <p> Add Car</p>
+                    <StyledButton src={settings}/>
+
+
                     <ul>
                         {this.state.cars.map(e =>
-                            <Item id={e.id} mark={e.mark} model={e.model} deleteCar ={() => this.deleteCar(e.id)}> </Item>
+                            <Item id={e.id} mark={e.mark} model={e.model}
+                                  deleteCar={() => this.deleteCar(e.id)}> </Item>
                         )}
 
                     </ul>
+                    <Modal addCar={this.addCar}/>
                 </header>
             </div>
         );
