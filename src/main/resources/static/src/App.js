@@ -22,6 +22,8 @@ class App extends React.Component {
 
     state = {
         cars: [],
+        isModalOpen: false,
+
     };
 
     componentDidMount() {
@@ -40,7 +42,7 @@ class App extends React.Component {
 
     addCar = (car) => {
         Api.addNewTimebox(car)
-            .then(() => Equipy.getEquipy())
+            .then(() => Api.getAllTimeboxes())
             .then(cars => this.setState({cars}))
     };
 
@@ -65,7 +67,7 @@ class App extends React.Component {
                         )}
 
                     </ul>
-                    <Modal addCar={this.addCar}/>
+                    {this.state.isModalOpen && <Modal addCar={this.addCar}/>}
                 </header>
             </div>
         );

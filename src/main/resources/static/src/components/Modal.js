@@ -1,5 +1,6 @@
-import React from 'react';
-// import Form from "../Form/Form";
+import React, {useState} from 'react';
+import {Button} from './Button';
+
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
@@ -17,6 +18,18 @@ padding: 70px 80px 50px;
 `
 
 
+const Textarea = styled.textarea`
+    height: 50px;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  margin: 15px 0;
+  font-size: 18px;
+`
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`
 
 const Input = styled.input`
   height: 40px;
