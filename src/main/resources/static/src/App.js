@@ -26,6 +26,19 @@ class App extends React.Component {
 
     };
 
+    openModal = () => {
+        this.setState({
+            isModalOpen: true,
+        })
+
+    }
+
+    closeModal = () => {
+        this.setState({
+            isModalOpen: false,
+        })
+    }
+
     componentDidMount() {
         Api.getAllTimeboxes()
             .then((cars) => this.setState({cars}))
@@ -41,7 +54,7 @@ class App extends React.Component {
 
 
     addCar = (car) => {
-        Api.addNewTimebox(car)
+        Api.addUser(car)
             .then(() => Api.getAllTimeboxes())
             .then(cars => this.setState({cars}))
     };
@@ -57,17 +70,17 @@ class App extends React.Component {
                         Cars List
                     </p>
                     <p> Add Car</p>
-                    <StyledButton src={settings}/>
+                    <StyledButton src={settings} onClick={this.openModal}/>
 
 
                     <ul>
                         {this.state.cars.map(e =>
-                            <Item id={e.id} mark={e.mark} model={e.model}
+                            <Item key={e.id} id={e.id} mark={e.mark} model={e.model}
                                   deleteCar={() => this.deleteCar(e.id)}> </Item>
                         )}
 
                     </ul>
-                    {this.state.isModalOpen && <Modal addCar={this.addCar}/>}
+                    {this.state.isModalOpen && <Modal closeModal={this.closeModal} addCar={this.addCar}/>}
                 </header>
             </div>
         );

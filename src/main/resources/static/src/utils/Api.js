@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const BASE_URL = "http://localhost:8080/";
 
 export const Api = {
@@ -11,6 +13,10 @@ export const Api = {
         const response = await makeRequest(BASE_URL, "POST", timeboxToAdd);
         const addedTimebox = await response.json();
         return addedTimebox;
+    },
+    addUser: async (user) => {
+        const response = await axios.post(`${BASE_URL}/`, user);
+        return response.data;
     },
 
     replaceTimebox: async (timeboxToReplace) => {
@@ -47,4 +53,4 @@ const makeRequest = async (url, method, body) => {
     return response;
 }
 
- // default Api;
+// default Api;

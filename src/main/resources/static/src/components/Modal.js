@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState} from "react";
 import {Button} from './Button';
 
 import styled from 'styled-components'
@@ -39,7 +39,7 @@ const Input = styled.input`
   font-size: 18px;
 `
 
-const Modal = ({closeModalFn, addCar}) => {
+const Modal = ({closeModal, addCar}) => {
 
         const [model, setModel] = useState("")
         const [mark, setMark] = useState("")
@@ -51,7 +51,7 @@ const Modal = ({closeModalFn, addCar}) => {
 
         return (
             <Wrapper>
-                <button>Close</button>
+                <button onClick={closeModal}>Close</button>
                 <Form onSubmit={handleSubmit}>
                     <label> </label>
                     <Textarea
