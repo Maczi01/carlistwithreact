@@ -11,7 +11,7 @@ const StyledButton = styled.img`
     margin: 0 30px;
     margin-bottom: 20px;
     border-radius: 3px;
-  background-color: #282c34;
+    background-color: #282c34;
     padding: 5px;
     height: 40px;
     width: 40px;
@@ -23,7 +23,7 @@ class App extends React.Component {
     state = {
         cars: [],
         isModalOpen: false,
-
+        isModalEditOpen: false,
     };
 
     openModal = () => {
@@ -36,6 +36,18 @@ class App extends React.Component {
     closeModal = () => {
         this.setState({
             isModalOpen: false,
+        })
+    }
+    openModalEdit = () => {
+        this.setState({
+            isModalEditOpen: true,
+        })
+
+    }
+
+    closeModalEdit = () => {
+        this.setState({
+            isModalEditOpen: false,
         })
     }
 
@@ -94,6 +106,8 @@ class App extends React.Component {
 
                     </ul>
                     {this.state.isModalOpen && <Modal closeModal={this.closeModal} addCar={this.addCar}/>}
+                    {this.state.isModalEditOpen && <Modal closeModalEdit={this.closeModalEdit} addCar={this.addCar}/>}
+
                 </header>
             </div>
         );
