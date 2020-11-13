@@ -46,7 +46,7 @@ const Modal = ({closeModal, addCar}) => {
 
         const handleSubmit = (e) => {
             e.preventDefault();
-            addCar(model, mark)
+            addCar({model, mark})
         }
 
         return (

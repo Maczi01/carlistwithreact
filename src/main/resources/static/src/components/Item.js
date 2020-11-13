@@ -2,6 +2,8 @@ import React from 'react';
 import edit from '../img/edit.svg'
 import del from '../img/del.svg'
 import styled from 'styled-components'
+import {useHistory} from "react-router";
+
 
 const StyledButton = styled.img`
     margin: 0 30px;
@@ -22,7 +24,8 @@ const Item = ({mark, model, id, deleteCar}) => (
     <Li>
         <p>{mark} {model}</p>
         <p>id: {id}</p>
-        <StyledButton src={edit}/>
+
+        <StyledButton src={edit} onClick={() => history.push(`/editasset/${asset.id}`)}/>
         <StyledButton src={del} onClick={deleteCar}/>
     </Li>
 );

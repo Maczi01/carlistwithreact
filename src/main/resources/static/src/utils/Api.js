@@ -10,12 +10,12 @@ export const Api = {
     },
 
     addNewTimebox: async (timeboxToAdd) => {
-        const response = await makeRequest(BASE_URL, "POST", timeboxToAdd);
+        const response = await makeRequest(`${BASE_URL}add`    , "POST", timeboxToAdd);
         const addedTimebox = await response.json();
         return addedTimebox;
     },
     addUser: async (user) => {
-        const response = await axios.post(`${BASE_URL}/`, user);
+        const response = await axios.post(`${BASE_URL}add`, user);
         return response.data;
     },
 
@@ -27,6 +27,7 @@ export const Api = {
         const replacedTimebox = await response.json();
         return replacedTimebox;
     },
+
 
     removeTimebox: async (id) => {
         // if (!timeboxToRemove.id) {

@@ -59,6 +59,19 @@ class App extends React.Component {
             .then(cars => this.setState({cars}))
     };
 
+    editAsset = (assetToUpdate) => {
+        Api.replaceTimebox(assetToUpdate)
+            .then((updatedAsset) => this.setState(prevState => {
+                    return {
+                        assets: [
+                            ...prevState.assets.map(u =>
+                                u.id === updatedAsset.id ? updatedAsset : u
+                            )]
+                    };
+                })
+            );
+    };
+
 
     render() {
 
