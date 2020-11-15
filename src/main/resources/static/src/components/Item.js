@@ -2,7 +2,6 @@ import React from 'react';
 import edit from '../img/edit.svg'
 import del from '../img/del.svg'
 import styled from 'styled-components'
-// import {useHistory} from "react-router";
 
 
 const StyledButton = styled.img`
@@ -20,12 +19,12 @@ const Li = styled.li`
 display: flex;
 `
 
-const Item = ({mark, model, id, deleteCar}) => (
+const Item = ({mark, model, id, deleteCar,editCar}) => (
     <Li>
         <p>{mark} {model}</p>
         <p>id: {id}</p>
 
-        <StyledButton src={edit} onClick={() => history.push(`/editasset/${id.id}`)}/>
+        <StyledButton src={edit} onClick={() => editCar(model, mark)}/>
         <StyledButton src={del} onClick={deleteCar}/>
     </Li>
 );

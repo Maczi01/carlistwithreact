@@ -39,37 +39,90 @@ const Input = styled.input`
   font-size: 18px;
 `
 
-const ModalForEdit = ({closeModalEdit, addCar}) => {
+class ModalForEdit extends React.Component {
+    state = {
+        currentMark: null,
+        currentModel: null,
+    };
 
-        const [model, setModel] = useState("")
-        const [mark, setMark] = useState("")
 
-        const handleSubmit = (e) => {
-            e.preventDefault();
-            addCar({model, mark})
-        }
+    handleInputChangeModel = e => {
+        this.setState({
+            currentModel: e.target.value,
+        });
+    };
 
+    handleInputChangeMark = e => {
+        this.setState({
+            currentMark: e.target.value,
+        });
+    };
+
+    handleEdit = ({car}) =>{
+        this.props.editCar(car)
+    };
+
+    render() {
         return (
+
             <Wrapper>
-                <button onClick={closeModalEdit}>Close</button>
-                <Form onSubmit={handleSubmit}>
+                {/*{console.log(OldMark)}*/}
+                {/*<button onClick={closeModalEdit}>Close</button>*/}
+                <Form onSubmit={this.handleEdit}>
                     <label> </label>
                     <Textarea
-                        onChange={e => setModel(e.target.value)}
-                        value={model}
-                        placeholder="Model"/>
+                        onChange={this.handleInputChangeModel}
+                        value={this.state.currentModel}
+                        placeholder="model"/>
                     <label> </label>
                     <Input
-                        onChange={e => setMark(e.target.value)}
-                        value={mark}
+                        onChange={this.handleInputChangeMark}
+                        value={this.state.currentMark}
                         placeholder="mark"/>
                     <label> </label>
                     <Button>Save</Button>
                 </Form>
             </Wrapper>
         )
-
     }
-;
+
+
+}
+
+// const ModalForEdit = ({closeModalEdit, edit, OldMark, OldModel}) => {
+//
+//         const [model, setModel] = useState(OldMark)
+//         const [mark, setMark] = useState(OldModel)
+//
+//         const handleSubmit = (e) => {
+//             e.preventDefault();
+//             console.log(OldMark)
+//             // editCar({model, mark})
+//         }
+//
+//         return (
+//
+//             <Wrapper>
+//                 {console.log(OldMark)}
+//                 <button onClick={closeModalEdit}>Close</button>
+//                 <Form onSubmit={handleSubmit}>
+//                     <label> </label>
+//                     <Textarea
+//                         onChange={e => setModel(e.target.value)}
+//                         value={OldModel}
+//                         placeholder={model}/>
+//                     <label> </label>
+//                     <Input
+//                         onChange={e => setMark(e.target.value)}
+//                         value={mark}
+//                         placeholder="mark"/>
+//                     <label> </label>
+//                     <Button>Save</Button>
+//                 </Form>
+//             </Wrapper>
+//         )
+//
+//     }
+
 
 export default ModalForEdit;

@@ -6,6 +6,10 @@ import Item from "./components/Item";
 import settings from './img/settings.svg'
 import styled from 'styled-components'
 import Modal from "./components/Modal";
+import ModalForEdit from "./components/ModalForEdit";
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import EditCarView from "./views/EditCarView";
+
 
 const StyledButton = styled.img`
     margin: 0 30px;
@@ -24,6 +28,8 @@ class App extends React.Component {
         cars: [],
         isModalOpen: false,
         isModalEditOpen: false,
+        currentMark: null,
+        currentModel: null,
     };
 
     openModal = () => {
@@ -40,6 +46,7 @@ class App extends React.Component {
     }
     openModalEdit = () => {
         this.setState({
+
             isModalEditOpen: true,
         })
 
@@ -71,45 +78,70 @@ class App extends React.Component {
             .then(cars => this.setState({cars}))
     };
 
-    editAsset = (assetToUpdate) => {
-        Api.replaceTimebox(assetToUpdate)
-            .then((updatedAsset) => this.setState(prevState => {
-                    return {
-                        assets: [
-                            ...prevState.assets.map(u =>
-                                u.id === updatedAsset.id ? updatedAsset : u
-                            )]
-                    };
-                })
-            );
+
+    editCar = (mark, model) => {
+        // console.log(mark, model)
+        // Api.replaceTimebox({mark, model})
+        //     .then((updatedAsset) => this.setState(prevState => {
+        //             return {
+        //                 assets: [
+        //                     ...prevState.assets.map(u =>
+        //                         u.id === updatedAsset.id ? updatedAsset : u
+        //                     )]
+        //             };
+        //         })
+        //     );
     };
 
 
     render() {
-
+        const {cars, isModalOpen} = this.state;
+        const contextElement = {
+            ...this.state,
+            openModal: this.openModal,
+            deleteCar: this.deleteCar,
+            editCar: this.deleteCar,
+        }
         return (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
-                    <p>
-                        Cars List
-                    </p>
-                    <p> Add Car</p>
-                    <StyledButton src={settings} onClick={this.openModal}/>
+            <>
+                <div className="App">
+                    <header className="App-header">
+                        <img src={logo} className="App-logo" alt="logo"/>
+                        <p>
+                            Cars List
+                        </p>
+                        <p> Add Car</p>
+                        <StyledButton src={settings} onClick={this.openModal}/>
 
 
-                    <ul>
-                        {this.state.cars.map(e =>
-                            <Item key={e.id} id={e.id} mark={e.mark} model={e.model}
-                                  deleteCar={() => this.deleteCar(e.id)}> </Item>
-                        )}
+                        <ul>
 
-                    </ul>
-                    {this.state.isModalOpen && <Modal closeModal={this.closeModal} addCar={this.addCar}/>}
-                    {this.state.isModalEditOpen && <Modal closeModalEdit={this.closeModalEdit} addCar={this.addCar}/>}
+                            {this.state.cars.map(e =>
+                                <Item key={e.id} id={e.id} mark={e.mark} model={e.model}
+                                      deleteCar={() => this.deleteCar(e.id)}
+                                      editCar={() => this.editCar(e.mark, e.model)}
+                                >
 
-                </header>
-            </div>
+
+                                </Item>
+                            )}
+                        </ul>
+                        {this.state.isModalOpen && <Modal closeModal={this.closeModal} addCar={this.addCar}/>}
+
+                        }
+
+                    </header>
+                </div>
+                <Router>
+                    <AppContext.Provider value={contextElement}>
+
+                        {/*<Route path="/editcar:id" component={EditView}/>*/}
+
+                        {/*<Route path="/" component={MainView}/>*/}
+                        <Route path="/editcar" component={EditCarView}/>
+                    </AppContext.Provider>
+                </Router>
+            </>
         );
     }
 }

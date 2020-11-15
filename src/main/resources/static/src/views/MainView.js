@@ -1,5 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
+import Item from "../App";
+import CarList from "../components/CarList";
 
 
 const ViewWrapper = styled.div`
@@ -10,32 +12,16 @@ const ViewWrapper = styled.div`
 `;
 
 
-export const MainView = () => {
-
-    const context = useContext(AppContext);
-    // const [users, setUsers] = useState([context.users]);
-    // const [loading, setLoading] = useState(true);
-    //
-    // useEffect(() => {
-    //         async function fetchData() {
-    //             const response = await User.getUsers()
-    //             setUsers(response)
-    //         }
-    //         setLoading(true)
-    //         fetchData();
-    //     },[context.users]
-    // )
-    // ;
-// }, [context.users]);
-
-    // const catchText = async (text) => {
-    //     const response = await User.getUserByLastName(text);
-    //     setUsers(response)
-    // };
-    console.log("MainView")
-    return (
+export const MainView = () =>
+    <AppContext.Consumer>
         <ViewWrapper>
+            {(context) => (
+                <CarList list={context.movieList}
+                         openModal={context.openModal}
+                         deleteCar={context.deleteCar}
+                         editCar={context.editCar}
+                />
 
+            )}
         </ViewWrapper>
-    )
-}
+    </AppContext.Consumer>
