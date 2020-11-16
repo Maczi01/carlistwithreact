@@ -9,18 +9,11 @@ import Modal from "./components/Modal";
 import ModalForEdit from "./components/ModalForEdit";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import EditCarView from "./views/EditCarView";
+import {MainView} from "./views/MainView";
+import AppContext from "./context/context";
 
 
-const StyledButton = styled.img`
-    margin: 0 30px;
-    margin-bottom: 20px;
-    border-radius: 3px;
-    background-color: #282c34;
-    padding: 5px;
-    height: 40px;
-    width: 40px;
-    justify-content: space-around;
-`
+
 
 class App extends React.Component {
 
@@ -97,47 +90,22 @@ class App extends React.Component {
     render() {
         const {cars, isModalOpen} = this.state;
         const contextElement = {
-            ...this.state,
+            cars: this.state.cars,
             openModal: this.openModal,
+            isOpenModal: this.state.isModalOpen,
             deleteCar: this.deleteCar,
             editCar: this.deleteCar,
+            addCar: this.addCar
         }
         return (
             <>
-                <div className="App">
-                    <header className="App-header">
-                        <img src={logo} className="App-logo" alt="logo"/>
-                        <p>
-                            Cars List
-                        </p>
-                        <p> Add Car</p>
-                        <StyledButton src={settings} onClick={this.openModal}/>
 
-
-                        <ul>
-
-                            {this.state.cars.map(e =>
-                                <Item key={e.id} id={e.id} mark={e.mark} model={e.model}
-                                      deleteCar={() => this.deleteCar(e.id)}
-                                      editCar={() => this.editCar(e.mark, e.model)}
-                                >
-
-
-                                </Item>
-                            )}
-                        </ul>
-                        {this.state.isModalOpen && <Modal closeModal={this.closeModal} addCar={this.addCar}/>}
-
-                        }
-
-                    </header>
-                </div>
                 <Router>
                     <AppContext.Provider value={contextElement}>
 
                         {/*<Route path="/editcar:id" component={EditView}/>*/}
 
-                        {/*<Route path="/" component={MainView}/>*/}
+                        <Route exact path="/" component={MainView}/>
                         <Route path="/editcar" component={EditCarView}/>
                     </AppContext.Provider>
                 </Router>

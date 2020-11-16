@@ -1,21 +1,26 @@
-import styled from "styled-components";
 import React from "react";
 import Item from "./Item";
-// import Item from "../App";
+import styled from 'styled-components';
 
-const CarList = ({list,deleteCar,editCar}) => (
-    <ul>
+const ViewWrapper = styled.div`
+   margin: 0 auto;
+   display: flex;
+   flex-direction: column;
+   width: 80vw;
+`;
 
-        {list.map(e =>
-            <Item key={e.id} id={e.id} mark={e.mark} model={e.model}
-                  deleteCar={() => deleteCar(e.id)}
-                  editCar={() => editCar(e.mark, e.model)}
-            >
-
-
-            </Item>
-        )}
-    </ul>
+const CarList = ({list, deleteCar, editCar}) => (
+    <ViewWrapper>
+        <ul>
+            {list.map(e =>
+                <Item key={e.id} id={e.id} mark={e.mark} model={e.model}
+                      deleteCar={() => deleteCar(e.id)}
+                      editCar={() => editCar(e.mark, e.model)}
+                >
+                </Item>
+            )}
+        </ul>
+    </ViewWrapper>
 )
 
-export default CarListl
+export default CarList
