@@ -47,26 +47,27 @@ export const MainView = () => {
                         <App>
 
                             <AppHeader>
-                                <AppLogo src={logo} className="App-logo" alt="logo"/>
+                                <AppLogo src={logo} alt="logo"/>
                                 <p>
                                     Cars List
                                 </p>
                                 <p> Add Car</p>
-                                <StyledButton src={settings} onClick={context.openModal}/>
-                                {context.isModalOpen &&
-                                <Modal closeModal={context.closeModal} addCar={context.addCar}/>}
+                                <StyledButton src={settings} onClick={ context.openModal}/>
+                                {/*{context.isModalOpen && <Modal closeModal={context.closeModal} addCar={context.addCar}/>}*/}
+
+                                <CarList list={context.cars}
+                                    //      openModal={context.openModal}
+                                         deleteCar={context.deleteCar}
+                                         editCar={context.editCar}
+                                />
+
+
                             </AppHeader>
-                            <CarList list={context.cars}
-                                //      openModal={context.openModal}
-                                //      deleteCar={context.deleteCar}
-                                //      editCar={context.editCar}
-                            />
                         </App>
                     </>
                 )
             }
             }
-
 
         </AppContext.Consumer>
     )

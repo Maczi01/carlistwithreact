@@ -13,41 +13,24 @@ import {MainView} from "./views/MainView";
 import AppContext from "./context/context";
 
 
-
-
 class App extends React.Component {
 
     state = {
         cars: [],
         isModalOpen: false,
-        isModalEditOpen: false,
-        currentMark: null,
-        currentModel: null,
     };
 
     openModal = () => {
         this.setState({
             isModalOpen: true,
         })
+        console.log("ble")
 
     }
 
     closeModal = () => {
         this.setState({
             isModalOpen: false,
-        })
-    }
-    openModalEdit = () => {
-        this.setState({
-
-            isModalEditOpen: true,
-        })
-
-    }
-
-    closeModalEdit = () => {
-        this.setState({
-            isModalEditOpen: false,
         })
     }
 
@@ -72,8 +55,8 @@ class App extends React.Component {
     };
 
 
-    editCar = (mark, model) => {
-        // console.log(mark, model)
+    editCar = () => {
+        console.log("mark, model")
         // Api.replaceTimebox({mark, model})
         //     .then((updatedAsset) => this.setState(prevState => {
         //             return {
@@ -88,7 +71,6 @@ class App extends React.Component {
 
 
     render() {
-        const {cars, isModalOpen} = this.state;
         const contextElement = {
             cars: this.state.cars,
             openModal: this.openModal,
@@ -99,14 +81,13 @@ class App extends React.Component {
         }
         return (
             <>
-
                 <Router>
                     <AppContext.Provider value={contextElement}>
-
-                        {/*<Route path="/editcar:id" component={EditView}/>*/}
+                        {this.state.isModalOpen && <Modal closeModal={this.closeModal} addCar={this.addCar}/>}
+                        <Route path="/editcar/:id" component={EditCarView}/>
 
                         <Route exact path="/" component={MainView}/>
-                        <Route path="/editcar" component={EditCarView}/>
+                        {/*<Route path="/editcar" component={EditCarView}/>*/}
                     </AppContext.Provider>
                 </Router>
             </>

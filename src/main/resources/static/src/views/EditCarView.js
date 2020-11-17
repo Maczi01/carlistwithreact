@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Button} from "../components/Button";
+import AppContext from "../context/context";
+import {useState} from "react/cjs/react.production.min";
 
 const ViewWrapper = styled.div`
    margin: 0 auto;
@@ -60,28 +62,48 @@ const Input = styled.input`
   margin: 15px 0;
   font-size: 18px;
 `
-const EditCarView = ({id}) => {
+const EditCarView = ({match}) => {
+    const selectedId = match.params.id;
+    console.log(selectedId)
+    const [model, setModel] = useState("")
+    const [mark, setMark] = useState("")
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        ({model, mark})
+    }
 
     return (
-        <Wrapper>
-            {/*{console.log(OldMark)}*/}
-            {/*<button onClick={closeModalEdit}>Close</button>*/}
-            {/*<Form onSubmit={this.handleEdit}>*/}
-            <Form>
-                <label> </label>
-                <Textarea
-                    // onChange={this.handleInputChangeModel}
-                    // value={this.state.currentModel}
-                    placeholder="model"/>
-                <label> </label>
-                <Input
-                    // onChange={this.handleInputChangeMark}
-                    // value={this.state.currentMark}
-                    placeholder="mark"/>
-                <label> </label>
-                <Button>Save</Button>
-            </Form>
-        </Wrapper>
+        <AppContext.Consumer>
+            {(context) => {
+                let carToEdit = context.cars.filter(item => item.id == selectedId)[0];
+                let  model = carToEdit.model
+                let  mark = carToEdit.mark
+                return (
+                    <Wrapper>
+                        {console.log(model, mark)}
+                        {/*<button onClick={closeModalEdit}>Close</button>*/}
+                        {/*<Form onSubmit={this.handleEdit}>*/}
+                        <Form>
+                            <label>
+                            </label>
+                            <Textarea
+                                value={model}
+                                placeholder="model"/>
+                            <label> </label>
+                            <Input
+                                // onChange={this.handleInputChangeMark}
+                                value={mark}
+                                placeholder={carToEdit.mark}/>
+                            <label> </label>
+                            <Button>Save</Button>
+                        </Form>
+                    </Wrapper>
+                )
+            }
+            }
+        </AppContext.Consumer>
+
     )
 }
 
