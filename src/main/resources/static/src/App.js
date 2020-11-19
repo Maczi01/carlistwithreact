@@ -55,18 +55,9 @@ class App extends React.Component {
     };
 
 
-    editCar = () => {
-        console.log("mark, model")
-        // Api.replaceTimebox({mark, model})
-        //     .then((updatedAsset) => this.setState(prevState => {
-        //             return {
-        //                 assets: [
-        //                     ...prevState.assets.map(u =>
-        //                         u.id === updatedAsset.id ? updatedAsset : u
-        //                     )]
-        //             };
-        //         })
-        //     );
+    editCar = (car) => {
+        console.log(car)
+        Api.replaceTimebox(car)
     };
 
 
@@ -76,7 +67,7 @@ class App extends React.Component {
             openModal: this.openModal,
             isOpenModal: this.state.isModalOpen,
             deleteCar: this.deleteCar,
-            editCar: this.deleteCar,
+            editCar: this.editCar,
             addCar: this.addCar
         }
         return (
@@ -84,10 +75,8 @@ class App extends React.Component {
                 <Router>
                     <AppContext.Provider value={contextElement}>
                         {this.state.isModalOpen && <Modal closeModal={this.closeModal} addCar={this.addCar}/>}
-                        <Route path="/editcar/:id" component={EditCarView}/>
-
                         <Route exact path="/" component={MainView}/>
-                        {/*<Route path="/editcar" component={EditCarView}/>*/}
+                        <Route path="/editcar/:id" component={EditCarView}/>
                     </AppContext.Provider>
                 </Router>
             </>
